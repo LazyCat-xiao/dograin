@@ -3,9 +3,9 @@
 var ws = new WebSocket("wss://broadcastlv.chat.bilibili.com/sub");
 
 ws.onopen = function () {
-    document.getElementById("page").append("ws已打开");
+    document.getElementById("page").append("已连接");
     ws.send(encode(JSON.stringify({
-        roomid: 7685334
+        roomid: 21672023//66688//5086//7685334//5279
     }), 7));
 }
 
@@ -48,7 +48,7 @@ ws.onmessage = async function (msgEvent) {
                         let packetLen = readInt(data, 0, 4)
                         let body = textDecoder.decode(data.slice(16, packetLen))
                         if (body)
-                            console.log(JSON.parse(body));
+                            jsontoprint(JSON.parse(body));
                         data = data.slice(packetLen)
                         last = last - packetLen
                     }
@@ -100,5 +100,26 @@ const encode = function (str, op) {
 }
 
 function jsontoprint(data) {
+    switch (data.cmd) {
+        case 'DANMU_MSG':
+            //console.log(data.info[2][1]+':'+data.info[1]);
+            //let para = document.createElement("p")
+            //let node = document.createTextNode(data.info[2][1]+':'+data.info[1])
+            //para.appendChild(node)
+            //document.getElementById('danmu').append(data.info[2][1]+':'+data.info[1]+'\n')
+            //document.getElementById('danmu').insertBefore(para,document.getElementById('mo').nextSibling)
+            break;
+        case 'SUPER_CHAT_MESSAGE':
+            console.log(data)
+            document.getElementById('danmu').append(data.data.price+'$'+data.data.user_info.uname+':'+data.data.message+'\n')
+            
+            break
+        default:
+            //console.log(data)
+            //document.getElementById('danmu').append(data.cmd+'\n')
+
+            break
+    }
+
 
 }
