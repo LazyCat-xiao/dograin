@@ -3,9 +3,9 @@
 var ws = new WebSocket("wss://broadcastlv.chat.bilibili.com/sub");
 
 ws.onopen = function () {
-    document.getElementById("page").append("已连接");
+    document.getElementById("status").append("已连接");
     ws.send(encode(JSON.stringify({
-        roomid: 5279//21672023//66688//5086//7685334
+        roomid: /* 5279 *//* 11365 */66688//5086//7685334
         
     }), 7));
 }
@@ -38,6 +38,7 @@ ws.onmessage = async function (msgEvent) {
                     let packetLen = readInt(buffer, 0, 4) - 16;
                     let pop = readInt(buffer, 16, packetLen)
                     console.log('气人值：' + pop)
+                    document.getElementById("popularity").innerText='气人值：'+pop
                 }
                 break;
             case 2:
@@ -70,9 +71,6 @@ ws.onmessage = async function (msgEvent) {
 };
 
 
-
-
-
 const textEncoder = new TextEncoder('utf-8');
 const textDecoder = new TextDecoder('utf-8');
 
@@ -102,21 +100,20 @@ const encode = function (str, op) {
 
 function jsontoprint(data) {
     switch (data.cmd) {
-        case 'DANMU_MSG':
+        /* case 'DANMU_MSG':
             //console.log(data.info[2][1]+':'+data.info[1]);
             //let para = document.createElement("p")
             //let node = document.createTextNode(data.info[2][1]+':'+data.info[1])
             //para.appendChild(node)
             //document.getElementById('danmu').append(data.info[2][1]+':'+data.info[1]+'\n')
-            //document.getElementById('danmu').insertBefore(para,document.getElementById('mo').nextSibling)
-            break;
+            break; */
         case 'SUPER_CHAT_MESSAGE':
             console.log(data)
             document.getElementById('danmu').append(data.data.price+'$'+data.data.user_info.uname+':'+data.data.message+'\n')
             
             break
         default:
-            //console.log(data)
+            console.log(data)
             //document.getElementById('danmu').append(data.cmd+'\n')
 
             break
