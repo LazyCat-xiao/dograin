@@ -5,7 +5,8 @@ var ws = new WebSocket("wss://broadcastlv.chat.bilibili.com/sub");
 ws.onopen = function () {
     document.getElementById("page").append("已连接");
     ws.send(encode(JSON.stringify({
-        roomid: 21672023//66688//5086//7685334//5279
+        roomid: 5279//21672023//66688//5086//7685334
+        
     }), 7));
 }
 
