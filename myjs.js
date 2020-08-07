@@ -1,4 +1,4 @@
-﻿
+
 //新建链接时会自动连接，并自动调用onopen方法
 var ws = new WebSocket("wss://broadcastlv.chat.bilibili.com/sub");
 
