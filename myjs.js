@@ -110,7 +110,6 @@ function jsontoprint(data) {
         case 'SUPER_CHAT_MESSAGE':
             console.log(data)
             document.getElementById('danmu').append(data.data.price+'$'+data.data.user_info.uname+':'+data.data.message+'\n')
-            
             break
         default:
             console.log(data)
